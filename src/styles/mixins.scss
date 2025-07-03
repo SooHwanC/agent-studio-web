@@ -1,0 +1,54 @@
+@use './variables' as *;
+
+@mixin glass-panel {
+  border: 1px solid rgba($slate-700, 0.3);
+  border-radius: 12px;
+}
+
+@mixin panel-base {
+  @include glass-panel;
+  padding: 1rem;
+}
+
+@mixin button-primary {
+  color: black;
+  border: 2px solid $primary-blue;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &:hover:not(:disabled) {
+    border-color: $primary-purple;
+    color: $primary-blue;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border: 1px solid rgba($slate-500, 0.5);
+    border-radius: 3px;
+
+    &:hover {
+      border-color: rgba($slate-400, 0.7);
+    }
+  }
+}
