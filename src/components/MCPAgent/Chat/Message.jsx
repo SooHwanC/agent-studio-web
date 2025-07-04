@@ -3,6 +3,32 @@ import { Bot } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
+// 마크다운 표 패턴 감지 함수
+const isMarkdownTable = (text) => {
+  const lines = text.split('\n');
+  return lines.some(line => 
+    line.includes('|') && 
+    line.split('|').length >= 3 &&
+    lines.some(l => l.includes('---') || l.includes(':-'))
+  );
+};
+
+// 코드 블록 내 마크다운 표 처리 함수
+const processContent = (content) => {
+  // 코드 블록 패턴 찾기
+  const codeBlockPattern = /```(?:markdown)?\n([\s\S]*?)\n```/g;
+  
+  return content.replace(codeBlockPattern, (match, code) => {
+    // 코드 블록 내용이 마크다운 표인지 확인
+    if (isMarkdownTable(code.trim())) {
+      // 마크다운 표면 코드 블록에서 빼내서 직접 렌더링
+      return '\n' + code.trim() + '\n';
+    }
+    // 마크다운 표가 아니면 원본 코드 블록 유지
+    return match;
+  });
+};
+
 export default function Message({ message }) {
   return (
     <div className={`message-wrapper ${message.type}`}>
@@ -39,6 +65,25 @@ export default function Message({ message }) {
                   if (inline) {
                     return <code className="inline-code" {...props}>{children}</code>;
                   }
+                  
+                  // 코드 블록 내용이 마크다운 표인지 확인
+                  const codeContent = String(children);
+                  if (isMarkdownTable(codeContent)) {
+                    return (
+                      <div className="embedded-table">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]} components={{
+                          table: ({ node, ...props }) => (
+                            <div className="table-wrapper">
+                              <table {...props} />
+                            </div>
+                          ),
+                        }}>
+                          {codeContent}
+                        </ReactMarkdown>
+                      </div>
+                    );
+                  }
+                  
                   return (
                     <div className="code-block">
                       <pre>
@@ -49,7 +94,7 @@ export default function Message({ message }) {
                 }
               }}
             >
-              {message.content}
+              {processContent(message.content)}
             </ReactMarkdown>
           ) : (
             message.content

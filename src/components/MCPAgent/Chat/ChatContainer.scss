@@ -269,6 +269,24 @@
         }
       }
 
+      // 코드 블록 내 임베디드 테이블
+      .embedded-table {
+        margin: 1rem 0;
+        
+        .table-wrapper {
+          margin: 0;
+          border: 1px solid rgba($primary-blue, 0.3);
+          background: rgba($primary-blue, 0.02);
+          
+          table {
+            th {
+              background: rgba($primary-blue, 0.1);
+              color: $primary-blue;
+            }
+          }
+        }
+      }
+
       // 리스트 스타일
       ul, ol {
         margin: 0.5rem 0;
