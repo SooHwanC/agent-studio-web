@@ -10,11 +10,13 @@ const MCPServerItem = ({ server, onDeleteServer }) => {
   const mcpSelection = useAppStore((state) => state.mcpSelection);
   const {
     toggleServerSelection,
-    toggleToolSelection,
+    // 도구 선택 관련 함수 주석 처리
+    // toggleToolSelection,
   } = useAppStore();
 
   const isServerSelected = (serverId) => mcpSelection.selectedServers.has(serverId);
-  const isToolSelected = (toolId) => mcpSelection.selectedTools.has(toolId);
+  // 도구 선택 확인 함수 주석 처리
+  // const isToolSelected = (toolId) => mcpSelection.selectedTools.has(toolId);
   
   // 서버 활성 상태 확인
   const isServerActive = server.status === 'active';
@@ -44,7 +46,8 @@ const MCPServerItem = ({ server, onDeleteServer }) => {
 
   const activeToolsCount = server.tools?.filter(tool => server.status === 'active').length || 0;
   const totalToolsCount = server.tools?.length || 0;
-  const selectedToolsInServer = server.tools?.filter(tool => isToolSelected(tool.id)).length || 0;
+  // 선택된 도구 카운트 주석 처리
+  // const selectedToolsInServer = server.tools?.filter(tool => isToolSelected(tool.id)).length || 0;
 
   const handleServerToggle = (e) => {
     e.stopPropagation();
@@ -53,12 +56,13 @@ const MCPServerItem = ({ server, onDeleteServer }) => {
     toggleServerSelection(server.id, server.tools);
   };
 
-  const handleToolToggle = (e, toolId) => {
-    e.stopPropagation();
-    // 서버가 비활성 상태면 툴 토글 불가
-    if (!isServerActive) return;
-    toggleToolSelection(toolId);
-  };
+  // 도구 토글 함수 주석 처리
+  // const handleToolToggle = (e, toolId) => {
+  //   e.stopPropagation();
+  //   // 서버가 비활성 상태면 툴 토글 불가
+  //   if (!isServerActive) return;
+  //   toggleToolSelection(toolId);
+  // };
 
   const handleServerDelete = (e) => {
     e.stopPropagation();
@@ -96,11 +100,12 @@ const MCPServerItem = ({ server, onDeleteServer }) => {
                 {getStatusText(server.status)}
               </span>
             </div>
-            {selectedToolsInServer > 0 && isServerActive && (
+            {/* 선택된 도구 배지 주석 처리 */}
+            {/* {selectedToolsInServer > 0 && isServerActive && (
               <div className="selected-tools-badge">
                 {selectedToolsInServer}개 선택됨
               </div>
-            )}
+            )} */}
           </div>
         </div>
         <div className="header-controls">
@@ -141,23 +146,25 @@ const MCPServerItem = ({ server, onDeleteServer }) => {
               <div className="tools-list">
                 {server.tools.map((tool) => {
                   const isToolExpanded = expandedTools[tool.id];
-                  const toolSelected = isToolSelected(tool.id);
+                  // 도구 선택 상태 확인 주석 처리
+                  // const toolSelected = isToolSelected(tool.id);
                   
                   return (
-                    <div key={tool.id} className={`tool-item-enhanced ${toolSelected ? 'selected' : ''} ${!isServerActive ? 'disabled' : ''}`}>
+                    <div key={tool.id} className={`tool-item-enhanced ${!isServerActive ? 'disabled' : ''}`}>
                       <div 
                         className="tool-header"
                         onClick={() => toggleToolExpansion(tool.id)}
                       >
                         <div className="tool-info">
                           <div className="tool-main-info">
-                            <div 
+                            {/* 도구 체크박스 완전히 제거 */}
+                            {/* <div 
                               className={`tool-checkbox ${toolSelected ? 'checked' : ''} ${!isServerActive ? 'disabled' : ''}`}
                               onClick={(e) => handleToolToggle(e, tool.id)}
                               style={{ cursor: isServerActive ? 'pointer' : 'not-allowed' }}
                             >
                               {toolSelected && isServerActive && <Check size={10} />}
-                            </div>
+                            </div> */}
                             <span className="tool-name">{tool.tool_name}</span>
                             <div className={`tool-status ${server.status === 'active' ? 'active' : 'inactive'}`}></div>
                           </div>

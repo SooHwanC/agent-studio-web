@@ -6,7 +6,8 @@ const MCPOverview = ({ servers, isLoading, error, onRefresh, isRefreshing }) => 
   const mcpSelection = useAppStore((state) => state.mcpSelection);
   const { selectAllServers, clearAllSelections, loadMCPSelections } = useAppStore();
 
-  const getSelectedToolsCount = () => mcpSelection.selectedTools.size;
+  // 도구 선택 관련 함수들 주석 처리
+  // const getSelectedToolsCount = () => mcpSelection.selectedTools.size;
   const getSelectedServersCount = () => mcpSelection.selectedServers.size;
 
   // 컴포넌트 마운트시 저장된 선택 상태 복원
@@ -100,17 +101,18 @@ const MCPOverview = ({ servers, isLoading, error, onRefresh, isRefreshing }) => 
         </div>
       </div>
       
-      {/* 선택 현황 표시 */}
+      {/* 선택 현황 표시 - 도구 선택 관련 부분 주석 처리 */}
       <div className="selection-summary">
         <div className="selection-stats">
           <div className="selection-stat">
             <span className="selection-number">{getSelectedServersCount()}</span>
             <span className="selection-label">선택된 서버</span>
           </div>
-          <div className="selection-stat">
+          {/* 도구 선택 카운트 완전히 제거 */}
+          {/* <div className="selection-stat">
             <span className="selection-number primary">{getSelectedToolsCount()}</span>
             <span className="selection-label">선택된 도구</span>
-          </div>
+          </div> */}
         </div>
         
         {/* 전체 선택/해제 버튼 */}
