@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // API 클라이언트 생성
 export const apiClient = axios.create({
- baseURL: 'https://monitor-faithful-slightly.ngrok-free.app/api/v1',
+ baseURL: import.meta.env.VITE_API_BASE_URL + '/api/v1',
  timeout: 10000,
  headers: {
    'Content-Type': 'application/json',

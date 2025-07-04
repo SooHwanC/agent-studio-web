@@ -145,6 +145,171 @@
         animation: blink 1s infinite;
         margin-left: 2px;
       }
+
+      // 마크다운 요소 스타일링
+      h1, h2, h3, h4, h5, h6 {
+        margin: 1rem 0 0.5rem 0;
+        font-weight: 600;
+        line-height: 1.3;
+        
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+
+      h1 { font-size: 1.5rem; }
+      h2 { font-size: 1.25rem; }
+      h3 { font-size: 1.125rem; }
+      h4 { font-size: 1rem; }
+      h5 { font-size: 0.875rem; }
+      h6 { font-size: 0.75rem; }
+
+      p {
+        margin: 0.5rem 0;
+        
+        &:first-child {
+          margin-top: 0;
+        }
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      strong {
+        font-weight: 600;
+        color: $primary-blue;
+      }
+
+      em {
+        font-style: italic;
+        color: $slate-700;
+      }
+
+      // 인라인 코드 스타일
+      .inline-code {
+        background: rgba($primary-blue, 0.1);
+        color: $primary-blue;
+        padding: 0.125rem 0.25rem;
+        border-radius: 4px;
+        font-size: 0.875em;
+        font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        font-weight: 500;
+      }
+
+      // 코드 블록 스타일
+      .code-block {
+        margin: 1rem 0;
+        border-radius: 8px;
+        background: #f8f9fa;
+        border: 1px solid rgba($slate-300, 0.5);
+        overflow-x: auto;
+        
+        pre {
+          margin: 0;
+          padding: 1rem;
+          background: transparent;
+          
+          code {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.4;
+            color: $slate-800;
+            background: transparent;
+            border: none;
+            padding: 0;
+          }
+        }
+      }
+
+      // 테이블 스타일
+      .table-wrapper {
+        margin: 1rem 0;
+        overflow-x: auto;
+        border-radius: 8px;
+        border: 1px solid rgba($slate-300, 0.5);
+        background: white;
+        
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 0.875rem;
+          
+          th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid rgba($slate-200, 0.8);
+            
+            &:not(:last-child) {
+              border-right: 1px solid rgba($slate-200, 0.5);
+            }
+          }
+          
+          th {
+            background: rgba($primary-blue, 0.05);
+            font-weight: 600;
+            color: $primary-blue;
+            border-bottom: 2px solid rgba($primary-blue, 0.2);
+          }
+          
+          tr {
+            &:hover {
+              background: rgba($primary-blue, 0.02);
+            }
+            
+            &:last-child td {
+              border-bottom: none;
+            }
+          }
+          
+          // 정렬 지원
+          .text-left { text-align: left; }
+          .text-center { text-align: center; }
+          .text-right { text-align: right; }
+        }
+      }
+
+      // 리스트 스타일
+      ul, ol {
+        margin: 0.5rem 0;
+        padding-left: 1.5rem;
+        
+        li {
+          margin: 0.25rem 0;
+          line-height: 1.4;
+        }
+      }
+
+      ul {
+        list-style-type: disc;
+        
+        ul {
+          list-style-type: circle;
+          
+          ul {
+            list-style-type: square;
+          }
+        }
+      }
+
+      blockquote {
+        margin: 1rem 0;
+        padding: 0.5rem 1rem;
+        border-left: 4px solid $primary-blue;
+        background: rgba($primary-blue, 0.05);
+        border-radius: 0 4px 4px 0;
+        
+        p {
+          margin: 0;
+          font-style: italic;
+        }
+      }
+
+      hr {
+        margin: 1.5rem 0;
+        border: none;
+        border-top: 1px solid rgba($slate-300, 0.5);
+      }
     }
 
     .message-timestamp {
@@ -262,12 +427,50 @@
     order: 1;
     height: 60vh;
   }
+  
+  .messages-container {
+    .message {
+      .message-content {
+        .table-wrapper {
+          font-size: 0.8rem;
+          
+          table {
+            th, td {
+              padding: 0.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 @media (max-width: 768px) {
   .messages-container {
     .message {
       max-width: 90%;
+      
+      .message-content {
+        .table-wrapper {
+          font-size: 0.75rem;
+          
+          table {
+            th, td {
+              padding: 0.4rem;
+            }
+          }
+        }
+        
+        .code-block {
+          pre {
+            padding: 0.75rem;
+            
+            code {
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
     }
   }
 
